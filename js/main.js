@@ -180,8 +180,8 @@ numberInput.addEventListener("input", function () {
     const number = parseFloat(this.value);
     const factorialResult = factorial(number);
     const squareRootResult = squareRoot(number);
-    const cubeRootResult = cubeRoot(number);
-    const fourthRootResult = fourthRoot(number);
+    const cubeRootResult = Math.pow(number, 1 / 3);
+    const fourthRootResult = Math.pow(number, 1 / 4);
     const squareResult = numberWithCommas(square(number));
     const cubeResult = numberWithCommas(cube(number));
     const powerResult = numberWithCommas(Math.pow(2, number));

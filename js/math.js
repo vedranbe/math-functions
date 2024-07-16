@@ -30,50 +30,6 @@ function squareRoot(number) {
     return guess;
 }
 
-function cubeRoot(number) {
-    // Handle invalid input (negative numbers) - Cube root of negative number can be real
-    if (number < 0) {
-        return "<span class='error'>Error: Cube root of a negative number results in a negative number.</span>";
-    }
-
-    // Implement a basic iterative approach
-    let guess = 1;
-    while (guess * guess * guess <= number) {
-        guess++;
-    }
-
-    // Refine the guess for a desired precision
-    const precision = 100; // Adjust for desired number of decimal places (100 for 2 decimals)
-    for (let i = 0; i < precision; i++) {
-        guess = (guess + number / (guess * guess)) / 2;
-    }
-
-    // Round the result to 2 decimal places using toFixed(2)
-    return guess;
-}
-
-function fourthRoot(number) {
-    // Handle invalid input (negative numbers) - Cube root of negative number can be real
-    if (number < 0) {
-        return "<span class='error'>Error: Fourth root of a negative number results in a negative number.</span>";
-    }
-
-    // Implement a basic iterative approach
-    let guess = 1;
-    while (guess * guess * guess * guess <= number) {
-        guess++;
-    }
-
-    // Refine the guess for a desired precision
-    const precision = 100; // Adjust for desired number of decimal places (100 for 2 decimals)
-    for (let i = 0; i < precision; i++) {
-        guess = (guess + number / (guess * guess * guess)) / 2;
-    }
-
-    // Round the result to 2 decimal places using toFixed(2)
-    return guess;
-}
-
 /// SQUARE
 function square(number) {
     return number * number;
