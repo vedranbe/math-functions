@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Functions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-YWznkfwQXVzCWjLwDGEUHdGYf3vZqObRB+rueddqk/NQbpvNuj&#x27;FNKG/zpQ1NBQIWcrqYH8mwTjvWBOQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="content">
+        <h1>Math Functions</h1>
+        <input type="text" id="numberInput" placeholder="Enter a number" min="-999" max="9999" autocomplete="off">
+        <div id="checkbox-container"></div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Function</th>
+                    <th>Formula</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="visible">
+                    <td>Factorial</td>
+                    <td><span class="numberOutput"></span>!</td>
+                    <td class="copy-cell" title="Copy to clipboard!"><span id="factorial"></span></td>
+                </tr>
+                <tr class="visible">
+                    <td>Square Root</td>
+                    <td>&radic;<span class="numberOutput"></span></td>
+                    <td class="copy-cell" title="Copy to clipboard!"><span id="squareRoot"></span></td>
+                </tr>
+                <tr class="visible">
+                    <td>Square</td>
+                    <td><span class="numberOutput"></span><sup>2</sup></td>
+                    <td class="copy-cell" title="Copy to clipboard!"><span id="square"></span></td>
+                </tr>
+                <tr class="visible">
+                    <td>2 raised to the power</td>
+                    <td>2<sup><span class="numberOutput"></span></sup></td>
+                    <td class="copy-cell" title="Copy to clipboard!"><span id="power"></span></td>
+                </tr>
+                <tr class="visible">
+                    <td>Area of the circle</td>
+                    <td>π * <span class="numberOutput"></span><sup>2</sup></td>
+                    <td class="copy-cell" title="Copy to clipboard!"><span id="circleArea"></span></td>
+                </tr>
+                <tr class="visible">
+                    <td>Sine</td>
+                    <td>sin(<span class="numberOutput"></span>)</td>
+                    <td class="copy-cell" title="Copy to clipboard!"><span id="sine"></span></td>
+                </tr>
+                <tr class="visible">
+                    <td>Cosine</td>
+                    <td>cos(<span class="numberOutput"></span>)</td>
+                    <td class="copy-cell" title="Copy to clipboard!"><span id="cos"></span></td>
+                </tr>
+                <tr class="visible">
+                    <td>Logarithm</td>
+                    <td>log(<span class="numberOutput"></span>)</td>
+                    <td class="copy-cell" title="Copy to clipboard!"><span id="log"></span></td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+    <script src="js/math.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
