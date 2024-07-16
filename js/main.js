@@ -9,6 +9,12 @@ const functionNames = [
     { title: "Logarithm", value: "log" },
 ];
 
+const primeMessage = document.getElementById("primeMessage");
+
+
+
+
+
 /**
  * Updates the odd and even classes of visible rows in a table.
  */
@@ -183,4 +189,19 @@ numberInput.addEventListener("input", function () {
     document.getElementById("sine").textContent = `${sineCosineResult.sine}`;
     document.getElementById("cos").textContent = `${sineCosineResult.cosine}`;
     document.getElementById("log").innerHTML = `${logResult}`;
+
+    if (isNaN(number) || number <= 1) {
+        primeMessage.innerHTML = `<span class="not-prime">Not a prime number</span>`;
+        return;
+    }
+
+    let isPrime = true;
+    for (let i = 2; i <= Math.sqrt(number); i++) {
+        if (number % i === 0) {
+            isPrime = false;
+            break;
+        }
+    }
+
+    primeMessage.innerHTML = isPrime ? `<span class="prime">Prime number</span>` : `<span class="not-prime">Not a prime number</span>`;
 });
