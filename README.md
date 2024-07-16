@@ -1,2 +1,2 @@
-# math-functions
+# Math Functions
 Simple math functions calculator
