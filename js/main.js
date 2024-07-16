@@ -1,6 +1,8 @@
 const functionNames = [
     { title: "Factorial", value: "factorial" },
     { title: "Square Root", value: "squareRoot" },
+    { title: "Cube Root", value: "cubeRoot" },
+    { title: "Fourth Root", value: "fourthRoot" },
     { title: "Square", value: "square" },
     { title: "Power of 2", value: "power" },
     { title: "Circle Area", value: "circleArea" },
@@ -10,9 +12,6 @@ const functionNames = [
 ];
 
 const primeMessage = document.getElementById("primeMessage");
-
-
-
 
 
 /**
@@ -168,6 +167,8 @@ numberInput.addEventListener("input", function () {
     const number = parseFloat(this.value);
     const factorialResult = factorial(number);
     const squareRootResult = squareRoot(number);
+    const cubeRootResult = cubeRoot(number);
+    const fourthRootResult = fourthRoot(number);
     const squareResult = square(number);
     const powerResult = Math.pow(2, number);
     const circleResult = circleArea(number);
@@ -183,6 +184,8 @@ numberInput.addEventListener("input", function () {
 
     document.getElementById("factorial").textContent = `${factorialResult}`;
     document.getElementById("squareRoot").innerHTML = `${squareRootResult}`;
+    document.getElementById("cubeRoot").innerHTML = `${cubeRootResult}`;
+    document.getElementById("fourthRoot").innerHTML = `${fourthRootResult}`;
     document.getElementById("square").textContent = `${squareResult}`;
     document.getElementById("power").textContent = `${powerResult}`;
     document.getElementById("circleArea").textContent = `${circleResult}`;
