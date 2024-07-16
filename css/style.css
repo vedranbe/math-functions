@@ -40,13 +40,12 @@ h1 {
 }
 
 #checkbox-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    width: 600px;
+    margin: 0 auto;
 }
 
 #checkbox-container label {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     font-size: 14px;
     cursor: pointer;
@@ -244,10 +243,7 @@ table td.copy-cell .fa-solid {
 @media only screen and (max-width: 787px) {
     #checkbox-container {
         display: block;
-    }
-
-    #checkbox-container label {
-        display: inline-flex;
+        width: auto;
     }
 
     table {

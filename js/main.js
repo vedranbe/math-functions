@@ -4,6 +4,7 @@ const functionNames = [
     { title: "Cube Root", value: "cubeRoot" },
     { title: "Fourth Root", value: "fourthRoot" },
     { title: "Square", value: "square" },
+    { title: "Cube", value: "cube" },
     { title: "Power of 2", value: "power" },
     { title: "Circle Area", value: "circleArea" },
     { title: "Sine", value: "sine" },
@@ -12,6 +13,18 @@ const functionNames = [
 ];
 
 const primeMessage = document.getElementById("primeMessage");
+
+function numberWithCommas(x) {
+    // Split the number into integer and decimal parts
+    const [integerPart, decimalPart] = x.toString().split(".");
+
+    // Format the integer part with commas
+    const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    // Combine the formatted integer and decimal part
+    return `${formattedInteger}${decimalPart ? "." + decimalPart : ""}`;
+}
+
 
 
 /**
@@ -163,15 +176,16 @@ const numberOutput = document.querySelectorAll(".numberOutput");
 
 numberInput.addEventListener("input", function () {
     removeClass();
-    this.value = this.value.slice(0, 4);
+    this.value = this.value.slice(0, 5);
     const number = parseFloat(this.value);
     const factorialResult = factorial(number);
     const squareRootResult = squareRoot(number);
     const cubeRootResult = cubeRoot(number);
     const fourthRootResult = fourthRoot(number);
-    const squareResult = square(number);
-    const powerResult = Math.pow(2, number);
-    const circleResult = circleArea(number);
+    const squareResult = numberWithCommas(square(number));
+    const cubeResult = numberWithCommas(cube(number));
+    const powerResult = numberWithCommas(Math.pow(2, number));
+    const circleResult = numberWithCommas(circleArea(number));
     const sineCosineResult = calculateSineCosine(number);
     const logResult = logarithm(number);
 
@@ -187,6 +201,7 @@ numberInput.addEventListener("input", function () {
     document.getElementById("cubeRoot").innerHTML = `${cubeRootResult}`;
     document.getElementById("fourthRoot").innerHTML = `${fourthRootResult}`;
     document.getElementById("square").textContent = `${squareResult}`;
+    document.getElementById("cube").textContent = `${cubeResult}`;
     document.getElementById("power").textContent = `${powerResult}`;
     document.getElementById("circleArea").textContent = `${circleResult}`;
     document.getElementById("sine").textContent = `${sineCosineResult.sine}`;

@@ -33,7 +33,7 @@ function squareRoot(number) {
 function cubeRoot(number) {
     // Handle invalid input (negative numbers) - Cube root of negative number can be real
     if (number < 0) {
-        return "<span class='error'>Warning: Cube root of a negative number results in a negative number.</span>";
+        return "<span class='error'>Error: Cube root of a negative number results in a negative number.</span>";
     }
 
     // Implement a basic iterative approach
@@ -55,7 +55,7 @@ function cubeRoot(number) {
 function fourthRoot(number) {
     // Handle invalid input (negative numbers) - Cube root of negative number can be real
     if (number < 0) {
-        return "<span class='error'>Warning: Cube root of a negative number results in a negative number.</span>";
+        return "<span class='error'>Error: Fourth root of a negative number results in a negative number.</span>";
     }
 
     // Implement a basic iterative approach
@@ -77,6 +77,11 @@ function fourthRoot(number) {
 /// SQUARE
 function square(number) {
     return number * number;
+}
+
+/// CUBE
+function cube(number) {
+    return number * number * number;
 }
 
 /// CIRCLE AREA
