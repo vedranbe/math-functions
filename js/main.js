@@ -166,6 +166,11 @@ lastColumnCells.forEach(cell => {
             notificationDiv.style.opacity = 0; // Fade out after 1 second
             setTimeout(() => {
                 notificationDiv.remove(); // Remove from DOM after fading out
+                const elementsWithFaRegular = document.querySelectorAll('.fa-regular');
+
+                elementsWithFaRegular.forEach(element => {
+                    element.classList.remove('fa-solid');
+                });
             }, 600); // Delay removal by 1000ms (1 second)
         }, 600); // Fade out after 1 second
     });
