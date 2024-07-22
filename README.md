@@ -13,3 +13,10 @@ Included:
  * Sine
  * Cosine
  * Logarithm
+ * Speed of light
+ * Speed of sound in different media at different temperatures
+
+ ## Preview
+
+![Screenshot from 2024-07-22 03-11-46](https://github.com/user-attachments/assets/39623ea4-997d-4566-9266-743adbbe3bef)
+
