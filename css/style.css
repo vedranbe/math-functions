@@ -140,6 +140,10 @@ table {
     overflow-x: auto;
     /* Enable horizontal scrolling on small screens */
 }
+table#speedOfSoundTable {
+    margin-top: 0;
+    margin-bottom: 40px;
+}
 
 table td,
 thead th {
@@ -180,7 +184,16 @@ tbody td:nth-child(3) {
     width: 320px;
     text-align: right;
 }
-
+table#speedOfSoundTable thead th:nth-child(1),
+table#speedOfSoundTable td:nth-child(1) {
+    width: 50%;
+    text-align: left;
+}
+table#speedOfSoundTable thead th:nth-child(2),
+table#speedOfSoundTable td:nth-child(2) {
+    width: 50%;
+    text-align: right;
+}
 table tr {
     counter-increment: row;
 }
@@ -208,10 +221,16 @@ table td.copy-cell span.fa-solid {
 table td.copy-cell span.error {
     font-size: 0.8em;
     font-weight: 400;
+    color: #999;
 }
 
 sup {
     font-size: 0.6em;
+}
+
+.small {
+    font-size: 0.75em;
+    text-align: left;
 }
 
 table td.copy-cell .fa-regular {
@@ -224,7 +243,9 @@ table td.copy-cell:hover .fa-regular,
 table td.copy-cell .fa-solid {
     opacity: 1;
 }
-
+table tfoot td {
+    padding-top: 20px;
+}
 .block {
     margin-bottom: 15px;
 }

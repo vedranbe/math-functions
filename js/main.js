@@ -10,6 +10,8 @@ const functionNames = [
     { title: "Sine", value: "sine" },
     { title: "Cosine", value: "cos" },
     { title: "Logarithm", value: "log" },
+    { title: "Speed of Light", value: "lightSpeed" },
+    { title: "Speed of Sound", value: "soundSpeed" },
 ];
 
 const primeMessage = document.getElementById("primeMessage");
@@ -40,8 +42,6 @@ function updateOddEvenClasses() {
     });
 }
 
-updateOddEvenClasses();
-
 /** 
  * Event handling for visibility change
  */
@@ -54,7 +54,6 @@ document.querySelectorAll('.row').forEach(function (row) {
 
 /**
  * Creates a checkbox element for a given function and appends it to the checkbox container.
- * @param {Object} functionInfo - An object containing the title and value of the function.
  */
 function createCheckbox(functionInfo) {
     // Get the checkbox container element
@@ -104,6 +103,12 @@ function createCheckbox(functionInfo) {
 
 document.addEventListener("DOMContentLoaded", function () {
     functionNames.forEach(createCheckbox);
+
+    // Set up the checkbox event listener
+    document.querySelector('#soundSpeedCheckbox').addEventListener('change', toggleTableVisibility);
+
+    // Initialize visibility based on checkbox state
+    toggleTableVisibility();
 });
 
 
@@ -112,72 +117,43 @@ document.addEventListener("DOMContentLoaded", function () {
  * inside cells with the class "copy-cell".
  */
 function removeClass() {
-    // Get all cells with the class "copy-cell"
+
     const copyCells = document.querySelectorAll(".copy-cell");
 
-    // Iterate over each cell
-    copyCells.forEach(cell => {
-        // Get the icon element with the class "fa-clipboard" inside the cell
-        const icon = cell.querySelector("span.fa-clipboard");
-
-        // Check if the icon exists and has the "fa-solid" class
-        if (icon && icon.classList.contains("fa-solid")) {
-            // Remove the "fa-solid" class from the icon
-            icon.classList.remove("fa-solid");
-        }
-    });
+    if (copyCells.length > 0) {
+        copyCells.forEach(cell => {
+            const icon = cell.querySelector("span.fa-clipboard");
+            if (icon && icon.classList.contains("fa-solid")) {
+                icon.classList.remove("fa-solid");
+            }
+        });
+    }
 }
-
-const table = document.querySelector("table");
-const lastColumnCells = table.querySelectorAll("tr td:last-child");
-
-lastColumnCells.forEach(cell => {
-    const icon = document.createElement("span");
-    icon.classList.add("fa-regular", "fa-clipboard"); // Add initial classes
-    cell.appendChild(icon);
-    // Add event listener to icon
-    cell.addEventListener("click", function () {
-        removeClass(); // Assuming this removes any previously added classes
-        icon.classList.add("fa-solid"); // Add fa-solid to the clicked cell's icon
-
-        const span = this.querySelector("span");
-
-        if (!navigator.clipboard) {
-            // Clipboard API not supported, handle fallback (optional)
-            return;
-        }
-        updateOddEvenClasses();
-
-        const notificationDiv = document.createElement("div");
-        notificationDiv.classList.add("clipboard-notification"); // Add custom class
-        notificationDiv.textContent = navigator.clipboard.writeText(span.textContent)
-            .then(() => {
-                notificationDiv.textContent = "Copied to clipboard!";
-            })
-            .catch(err => {
-                notificationDiv.textContent = "Failed to copy: " + err;
-            });
-
-        // Improved visibility and disappearance logic
-        document.body.appendChild(notificationDiv); // Append to body for visibility
-        notificationDiv.style.opacity = 1; // Set initial opacity to full visibility
-
-        setTimeout(() => {
-            notificationDiv.style.opacity = 0; // Fade out after 1 second
-            setTimeout(() => {
-                notificationDiv.remove(); // Remove from DOM after fading out
-                const elementsWithFaRegular = document.querySelectorAll('.fa-regular');
-
-                elementsWithFaRegular.forEach(element => {
-                    element.classList.remove('fa-solid');
-                });
-            }, 600); // Delay removal by 1000ms (1 second)
-        }, 600); // Fade out after 1 second
-    });
-});
 
 const numberInput = document.getElementById("numberInput");
 const numberOutput = document.querySelectorAll(".numberOutput");
+
+numberInput.addEventListener('keypress', (event) => {
+    const char = String.fromCharCode(event.which || event.keyCode);
+    const inputValue = numberInput.value;
+
+    // Allow only numbers, minus sign at the beginning, and one dot
+    if (
+        // Allow numbers and minus at the beginning
+        (char >= '0' && char <= '9') ||
+        (char === '-' && inputValue === '') ||
+
+        // Allow dot only if not already present
+        (char === '.' && inputValue.indexOf('.') === -1)
+    ) {
+        document.getElementById("main").style.display = 'table'; // Show table
+        return; // Allow the character
+    } else {
+        document.getElementById("main").style.display = 'none'; // Hide table
+    }
+
+    event.preventDefault(); // Prevent invalid characters
+});
 
 numberInput.addEventListener("input", function () {
     removeClass();
@@ -185,17 +161,15 @@ numberInput.addEventListener("input", function () {
     const number = parseFloat(this.value);
     const factorialResult = factorial(number);
     const squareRootResult = squareRoot(number);
-    const cubeRootResult = Math.pow(number, 1 / 3);
-    const fourthRootResult = Math.pow(number, 1 / 4);
+    const cubeRootResult = cubeRoot(number);
+    const fourthRootResult = fourthRoot(number);
     const squareResult = numberWithCommas(square(number));
     const cubeResult = numberWithCommas(cube(number));
     const powerResult = numberWithCommas(Math.pow(2, number));
     const circleResult = numberWithCommas(circleArea(number));
     const sineCosineResult = calculateSineCosine(number);
     const logResult = logarithm(number);
-
-    const isEmpty = this.value.trim() === "";
-    table.style.display = isEmpty ? "none" : "block";
+    const lightSpeedResult = numberWithCommas(lightSpeed(number));
 
     numberOutput.forEach(element => {
         element.textContent = `${number}`;
@@ -212,6 +186,14 @@ numberInput.addEventListener("input", function () {
     document.getElementById("sine").textContent = `${sineCosineResult.sine}`;
     document.getElementById("cos").textContent = `${sineCosineResult.cosine}`;
     document.getElementById("log").innerHTML = `${logResult}`;
+    document.getElementById("lightSpeed").innerHTML = `${lightSpeedResult}`;
+
+    // Populate table for Speed of sound
+    const results = soundSpeed(number);
+    populateTable(results);
+    toggleTableVisibility();
+
+    clipboardCopy();
 
     if (isNaN(number) || number <= 1) {
         primeMessage.innerHTML = `<span class="not-prime">Not a prime number</span>`;
@@ -227,4 +209,92 @@ numberInput.addEventListener("input", function () {
     }
 
     primeMessage.innerHTML = isPrime ? `<span class="prime">Prime number</span>` : `<span class="not-prime">Not a prime number</span>`;
+
+    
 });
+// Function to toggle the visibility of the table based on checkbox
+function toggleTableVisibility() {
+    const checkbox = document.querySelector('#soundSpeedCheckbox');
+    const table = document.querySelector('#speedOfSoundTable');
+    const numberInput = document.querySelector('#numberInput');
+
+    // Get the value from the numberInput and convert it to a float
+    const number = parseFloat(numberInput.value);
+
+    // Show or hide the table based on checkbox state and positive numberInput value
+    if (checkbox.checked && !isNaN(number)) {
+        table.style.display = 'table'; // Show table
+    } else {
+        table.style.display = 'none'; // Hide table
+    }
+    updateOddEvenClasses();
+}
+
+function clipboardCopy() {
+        const tables = document.querySelectorAll(".table");
+            tables.forEach(table => {
+            const lastColumnCells = table.querySelectorAll("tbody tr td:last-child");
+                // Check if lastColumnCells has elements
+                if (lastColumnCells.length > 0) {
+                    console.log(lastColumnCells);
+                    // Your other code for each table
+                } else {
+                    console.error('No last column cells found in table:', table);
+                }
+
+            lastColumnCells.forEach(cell => {
+                // Check if the cell already has a span with the class "fa-clipboard"
+                const existingIcon = cell.querySelector('span.fa-clipboard');
+
+                if (!existingIcon) {
+                    const icon = document.createElement("span");
+                    icon.classList.add("fa-regular", "fa-clipboard");
+                    cell.appendChild(icon);
+                }
+                // Add event listener to icon
+                cell.addEventListener("click", function () {
+                    removeClass(); // Assuming this removes any previously added classes
+                    const icon = this.querySelector('.fa-clipboard');
+                    if (icon) {
+                        icon.classList.add('fa-solid');
+                    }
+
+                    const span = this.querySelector("span");
+
+                    if (!navigator.clipboard) {
+                        // Clipboard API not supported, handle fallback (optional)
+                        return;
+                    }
+
+                    const notificationDiv = document.createElement("div");
+                    notificationDiv.classList.add("clipboard-notification"); // Add custom class
+                    notificationDiv.textContent = navigator.clipboard.writeText(span.textContent)
+                        .then(() => {
+                            notificationDiv.textContent = "Copied to clipboard!";
+                        })
+                        .catch(err => {
+                            notificationDiv.textContent = "Failed to copy: " + err;
+                        });
+
+                    // Improved visibility and disappearance logic
+                    document.body.appendChild(notificationDiv); // Append to body for visibility
+                    notificationDiv.style.opacity = 1; // Set initial opacity to full visibility
+
+                    setTimeout(() => {
+                        notificationDiv.style.opacity = 0; // Fade out after 1 second
+                        setTimeout(() => {
+                            notificationDiv.remove(); // Remove from DOM after fading out
+                            const elementsWithFaRegular = document.querySelectorAll('.fa-regular');
+
+                            elementsWithFaRegular.forEach(element => {
+                                element.classList.remove('fa-solid');
+                            });
+                        }, 600); // Delay removal by 600ms
+                    }, 600); // Fade out after 600ms
+
+                    updateOddEvenClasses();
+                });
+            });
+        });
+}
+

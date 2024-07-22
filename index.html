@@ -15,11 +15,11 @@
 <body>
     <div id="content">
         <h1>Math Functions</h1>
-        <input type="text" id="numberInput" placeholder="Enter a number" min="-9999" max="99999" autocomplete="off">
+        <input type="text" id="numberInput" placeholder="Enter a number" autocomplete="off">
         <span id="primeMessage"></span>
         <br>
         <div id="checkbox-container"></div>
-        <table>
+        <table id="main" class="table">
             <thead>
                 <tr>
                     <th>Function</th>
@@ -31,61 +31,81 @@
                 <tr class="visible">
                     <td>Factorial</td>
                     <td><span class="numberOutput"></span>!</td>
-                    <td class="copy-cell" title="Copy to clipboard!"><span id="factorial"></span></td>
+                    <td class="copy-cell" title="Copy to clipboard!"><span id="factorial" class="value"></span></td>
                 </tr>
                 <tr class="visible">
                     <td>Square Root</td>
                     <td>&radic;<span class="numberOutput"></span></td>
-                    <td class="copy-cell" title="Copy to clipboard!"><span id="squareRoot"></span></td>
+                    <td class="copy-cell" title="Copy to clipboard!"><span id="squareRoot" class="value"></span></td>
                 </tr>
                 <tr class="visible">
                     <td>Cube Root</td>
                     <td>&#8731;<span class="numberOutput"></span></td>
-                    <td class="copy-cell" title="Copy to clipboard!"><span id="cubeRoot"></span></td>
+                    <td class="copy-cell" title="Copy to clipboard!"><span id="cubeRoot" class="value"></span></td>
                 </tr>
                 <tr class="visible">
                     <td>Fourth Root</td>
                     <td>&#8732;<span class="numberOutput"></span></td>
-                    <td class="copy-cell" title="Copy to clipboard!"><span id="fourthRoot"></span></td>
+                    <td class="copy-cell" title="Copy to clipboard!"><span id="fourthRoot" class="value"></span></td>
                 </tr>
                 <tr class="visible">
                     <td>Square</td>
                     <td><span class="numberOutput"></span><sup>2</sup></td>
-                    <td class="copy-cell" title="Copy to clipboard!"><span id="square"></span></td>
+                    <td class="copy-cell" title="Copy to clipboard!"><span id="square" class="value"></span></td>
                 </tr>
                 <tr class="visible">
                     <td>Cube</td>
                     <td><span class="numberOutput"></span><sup>3</sup></td>
-                    <td class="copy-cell" title="Copy to clipboard!"><span id="cube"></span></td>
+                    <td class="copy-cell" title="Copy to clipboard!"><span id="cube" class="value"></span></td>
                 </tr>
                 <tr class="visible">
                     <td>2 raised to the power</td>
                     <td>2<sup><span class="numberOutput"></span></sup></td>
-                    <td class="copy-cell" title="Copy to clipboard!"><span id="power"></span></td>
+                    <td class="copy-cell" title="Copy to clipboard!"><span id="power" class="value"></span></td>
                 </tr>
                 <tr class="visible">
                     <td>Area of the circle</td>
                     <td>π * <span class="numberOutput"></span><sup>2</sup></td>
-                    <td class="copy-cell" title="Copy to clipboard!"><span id="circleArea"></span></td>
+                    <td class="copy-cell" title="Copy to clipboard!"><span id="circleArea" class="value"></span></td>
                 </tr>
                 <tr class="visible">
                     <td>Sine</td>
                     <td>sin(<span class="numberOutput"></span>)</td>
-                    <td class="copy-cell" title="Copy to clipboard!"><span id="sine"></span></td>
+                    <td class="copy-cell" title="Copy to clipboard!"><span id="sine" class="value"></span></td>
                 </tr>
                 <tr class="visible">
                     <td>Cosine</td>
                     <td>cos(<span class="numberOutput"></span>)</td>
-                    <td class="copy-cell" title="Copy to clipboard!"><span id="cos"></span></td>
+                    <td class="copy-cell" title="Copy to clipboard!"><span id="cos" class="value"></span></td>
                 </tr>
                 <tr class="visible">
                     <td>Logarithm</td>
                     <td>log(<span class="numberOutput"></span>)</td>
-                    <td class="copy-cell" title="Copy to clipboard!"><span id="log"></span></td>
+                    <td class="copy-cell" title="Copy to clipboard!"><span id="log" class="value"></span></td>
+                </tr>
+                <tr class="visible">
+                    <td>Speed of Light</td>
+                    <td><span class="numberOutput"></span>c</td>
+                    <td class="copy-cell" title="Copy to clipboard!"><span id="lightSpeed" class="value"></span></td>
                 </tr>
             </tbody>
         </table>
-
+        <table id="speedOfSoundTable" class="table">
+            <thead>
+                <tr>
+                    <th>Sound speed in different media at <span class="numberOutput"></span> °C</th>
+                    <th>Speed in km/h</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr></tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2"><div class="small">* The speed is constant regardless of the temperature</div></td>
+                </tr>
+            </tfoot>
+        </table>
     </div>
     <script src="js/math.js"></script>
     <script src="js/main.js"></script>
